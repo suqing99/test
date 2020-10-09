@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-on的修饰符</title>
+</head>
+<body>
+    <div id="app">
+
+        <div @click='divClick'>
+            点我
+            <!-- <button @click='btClick'>按钮</button> -->
+            <!-- 1.sopt修饰符的使用： 可以阻止冒泡 -->
+            <button @click.stop='btClick'>按钮</button>
+        </div>
+
+        <!-- 2.prevent修饰符的使用：阻止默认事件 -->
+        <br>
+        <form action="baidu">
+            <input type="submit" value="提交" @click.prevent='submitClick'>
+        </form>
+
+        <!-- 3.监听某个键盘的事件 -->
+        <br>
+        <!-- keyup键盘按下松开才执行 -->
+        <input type="text" placeholder="keyup键盘按下松开才执行" @keyup = 'keyUp' >
+        <!-- 键盘回车事件 -->
+        <input type="text" placeholder="键盘回车事件" @keyup.enter = 'keyUp' >
+
+        <!-- 4.once修饰符的使用：只触发一次回调 -->
+        <br>
+        <button @click.once='onceClick'>once按钮</button>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el:"#app",
+        data:{
+
+        },
+        methods:{
+            divClick(){
+                console.log('divClick')
+            },
+            btClick(){
+                console.log('btClick')
+            },
+            submitClick(){
+                console.log('submitClick阻止默认提交事件')
+            },
+            keyUp(){
+                console.log('keyUp键盘事件')
+            },
+            onceClick(){
+                console.log('onceClick点击多次只触发一次')
+            }
+        }
+    })
+</script>
