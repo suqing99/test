@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表展示</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ol>
+            <li v-for='item in moive'>{{item}}</li>
+        </ol>
+    </div>
+</body>
+</html>
+<script>
+    const app = new Vue({
+        el:'#app',
+        data:{
+            moive:['大话西游','八百','少年派']
+        }
+    })
+</script>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id='app'>
+        <h3>{{msg}}</h3>
+        <h3 v-once>{{msg}}</h3>
+        <p v-html='url'>
+
+        </p>
+        <p v-text='msg'>
+         v-text会覆盖标签里面的内容
+        </p>
+        <h4 v-pre>v-pre指令原封不动的输出不会响应数据：{{msg}}</h4>
+    </div>
+<hr>
+
+    <style>
+        [v-cloak]{
+           color: red;
+        }
+    </style>
+    <div id="app2" v-cloak>
+        {{name}}
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el:'#app',
+        data:{
+            msg:'v-once指令不会发生响应式数据变化',
+            url:'<a href="http://www.baidu.com">百度</a>'
+        }
+    })
+
+    // 1秒后发生改变
+    //在vue解析之前，div中一个属性V-cloak
+    //在vue解析之后，div中没有一个属性v-cloak
+    setTimeout(function(){
+        const app2 = new Vue({
+            el:'#app2',
+            data:{
+                name:'使用setTimeout定时器 1秒后发生改变'
+            }
+        })
+    },1000)
+</script>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <em>{{fistName}} {{lastName}}</em>
+        <br/>
+        <i>{{fistName +' '+ lastName}}</i>
+        <h3>{{getAllName()}}</h3>
+        <h1>{{allName}}</h1>
+
+        <hr>
+        <h2>总数量：{{nums}}</h2>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el:"#app",
+        data:{
+            fistName:"suqing",
+            lastName:"sq",
+
+            array:[
+                {id:1, name:'张三', num:12},
+                {id:2, name:'李四', num:52},
+                {id:3, name:'王五', num:77}
+
+            ]
+        },
+        computed:{
+            allName(){
+                return this.fistName + ' ' + this.lastName
+            },
+            // 计算num总数量
+            nums:function(){
+                let result = 0;
+                for(let i=0;i<this.array.length;i++){
+                    result += this.array[i].num
+                }
+                return result
+            }
+        },
+        methods:{
+            getAllName:function(){
+                return this.fistName + ' ' + this.lastName
+            }
+        }
+    })
+</script>
