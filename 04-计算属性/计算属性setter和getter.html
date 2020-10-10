@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性setter和getter</title>
+</head>
+<body>
+    <div id="app">
+        {{fullName}}
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+    const app = new Vue({
+        el:"#app",
+        data:{
+            firstName:"kobe",
+            lastName:"suqing"
+        },
+        computed:{
+            //函数方法
+            // fullName:function(){
+            //     return this.lastName + ' ' + this.firstName
+            // },
+
+            //对象方法 计算属性一般没有set方法，只读属性
+            fullName:{
+                //set方法必须放参数 在控制器赋值输入app.fullName='a'
+                set:function(newValue){
+                    console.log('---',newValue)
+                    // 通过截取的方式 把修改的值放入fullName里面
+                    const names = newValue.split(' ');
+                    this.firstName = names[0];
+                    this.lastName = names[1];
+                },
+
+                get:function(){
+                    return this.lastName + ' ' + this.firstName
+                }
+            }
+        }
+    })
+</script>

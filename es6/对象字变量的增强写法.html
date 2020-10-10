@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象字变量的增强写法</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script> 
+    //对象字变量
+    //const = obj = new object()
+    const obj = {
+        name: 'what',
+        age: 13,
+        hello:function(){
+            console.log('你最近好吗！')
+        }
+    }
+
+
+    // 1.属性的增强写法
+    const names = '小明';
+    const height = '190'
+    //ES5的写法
+    const objs = {
+        names:names,
+        height:height
+    }
+    console.log(objs)
+    //es6的写法
+    const objES6={
+        names,
+        height
+    }
+    console.log(objES6)
+
+
+    // 2.函数的增强写法
+    //ES5
+    const objfun = {
+        run:function(){},
+        fun:function(){}
+    }
+    const objfun = {
+        run(){},
+        fun(){}
+    }
+
+
+   
+</script>

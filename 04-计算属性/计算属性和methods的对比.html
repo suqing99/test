@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性和methods的对比</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 第一种直接拼接 -->
+        <h3>{{name1}} {{name2}}</h3>
+
+        <!-- 第二种通过methods方法 -->
+        <h4>{{fullName()}}</h4>
+
+        <!-- 第三种通过computed属性 调用多次使用computed属性 
+            比如： <em>{{getNanme}}</em>
+                   <em>{{getNanme}}</em>
+                    <em>{{getNanme}}</em>
+        
+        -->
+        <em>{{getNanme}}</em>
+    </div>
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el:"#app",
+        data:{
+            name1:'来吧',
+            name2:"展示"
+        },
+        methods:{
+            fullName:function(){
+                return this.name1 + ' ' + this.name2
+            }
+        },
+        computed:{
+            getNanme(){
+                return this.name1 + ' ' + this.name2
+            }
+        }
+    })
+</script>

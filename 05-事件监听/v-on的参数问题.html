@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-on的参数问题</title>
+</head>
+<body>
+  <div id="app">
+      <!-- 1.事件调用的方法没有参数 -->
+    <button @click='bt1'>按钮1</button>
+    <button @click=bt1()>按钮11</button>
+
+    <!-- 在事件定义是，写函数省略了小括号，但是方法本身是需要一个参数的，这个时候，vue会默认将浏览器产生的event事件对象作为参数传入到方法中 -->
+    <button @click='bt2(123)'>按钮2 传参</button>  
+    <button @click='bt2()'>按钮2 没有方参数就会报undefined</button>
+    <button @click='bt2'>按钮2 函数没有加（）自动生成event事件对象作为参数传入方法中 </button>  
+
+    <!-- 方法定义时，我们需要event对象，同时又需要其他参数 -->
+    <!-- 在调用方法时，如何手动的获取到浏览器参数event对象：要这样写  $event -->
+    <!-- 在参数中字符串必须要 '' 符号， 不然就是变量 -->
+    <button @click='bt3("你好啊", $event)'>按钮3</button>
+
+  </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<script>
+    const app = new Vue({
+        el:"#app",
+        data:{
+
+        },
+        methods:{
+            bt1(){
+                console.log('bt1')
+            },
+            bt2(a){
+                console.log('`````', a)
+            },
+            bt3(abc,event){
+                console.log(abc, event)
+            }
+        }
+    })
+</script>

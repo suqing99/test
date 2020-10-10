@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>let var</title>
+</head>
+<body>
+    <p>变量需要改变是用let  ----  不需要改变用const</p>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+</body>
+</html>
+<script>
+    // 1.变量作用域：变量在什么范围内是可用
+    {
+        var name = 'why';
+        console.log(name); //why
+    }
+    console.log(name); //why
+
+    // 2.没有块级作用域引起的问题：if的块级
+    var func;
+    if(true){
+        var a = 'a';
+        func = function(){
+            console.log(a) // aaa
+        }
+       // func()
+    }
+    a = 'aaa'; 
+   func()
+   console.log(a) //aaa
+
+   // 3.没有块级作用域引起的问题：for的块级
+   // 为什么闭包可以解决问题：函数是一个作用域
+//    使用var声明的变量，其作用域为该语句所在的函数内，且存在变量提升现象
+    // var bt = document.getElementsByTagName('button');
+    // for(var i=0;i<bt.length;i++){ 
+    //     // bt[i].addEventListener('click',function(){
+    //     //     console.log('第'+i +'被点击')  //遍历后 输出3
+    //     // })
+
+    //     (function(num){
+    //         bt[i].addEventListener('click',function(){
+    //         console.log('第'+num +'被点击')  //0 1 2
+    //     })
+
+    //     })(i)
+    // }
+
+    //用es6 有块级作用域
+    const bt = document.getElementsByTagName('button');
+    for(let i=0;i<bt.length;i++){  // let有自己的作用域 变量不会提升
+        bt[i].addEventListener('click',function(){
+            console.log('第'+i +'被点击')  //0 1 2
+        })   
+    }
+</script>
