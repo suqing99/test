@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-for添加key</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for='item in info' :key='item'>{{item}}{{name}}</li>
+        </ul>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el:"#app",
+        data:{
+            info:['A','B','C','D','E']
+        },
+        computed:{
+            name(){
+                // 在数组B后面添加 F
+                this.info.splice(2,0,'f')
+            }
+        }
+    })
+</script>

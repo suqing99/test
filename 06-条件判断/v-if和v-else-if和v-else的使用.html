@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-if和v-else-if和v-else的使用</title>
+</head>
+<body>
+    <div id="app">
+        <h3 v-if="score>=90">优秀</h3>
+        <h3 v-else-if='score>=80'>良好</h3>
+        <h3 v-else-if='score>=60'>及格</h3>
+        <h3 v-else>不及格</h3>
+        <h1>{{result}}</h1>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el:"#app",
+        data:{
+            score:20
+        },
+        computed:{
+            result(){
+                let showMsg = '';
+                if(this.score >=90 ){
+                    showMsg = '优秀'
+                }else if(this.score >=80){
+                    showMsg = '良好'
+                }else if(this.score >=60){
+                    showMsg = '及格'
+                }else{
+                    showMsg='不及格'
+                }
+                return showMsg
+            }
+        }
+    })
+</script>
