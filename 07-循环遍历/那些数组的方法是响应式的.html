@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>那些数组的方法是响应式的</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for='item in info' >{{item}}{{name}}</li>
+        </ul>
+        <button @click="pushs">按钮</button>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el:"#app",
+        data:{
+            info:['A','B','C','D','E']
+        },
+       
+        methods:{
+                pushs(){
+                    // push方法 最后添加内容
+                   // this.info.push('a');
+
+                //    pop()方法  删除最后一个元素
+                    // this.info.pop()
+
+                    // shift()方法  删除第一个元素
+                    // this.info.shift();
+
+                    // unshift()方法  在数组前面添加元素
+                    // this.info.unshift('www','aaa')
+
+
+                    // sort() 排序
+                    // this.info.sort();
+
+                    //reverse 倒序
+                    //this.info.reverse()
+
+                    //splice()方法 ： 删除元素，插入元素，替换元素
+                    //this.info.splice(0,1) //删除第一个元素（第一个，删除几个）
+                   // this.info.splice(1,0,'aadas')// (下标，删除0，添加aadas 元素)
+
+
+
+                   //set()方法 (要修改的对象， 索引值， 修改后的遏制)
+                   Vue.set(this.info,0,'1111')
+
+                }
+            }
+    })
+</script>
