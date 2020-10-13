@@ -29,7 +29,14 @@
 
 
         <hr>
-        <ul><li :class="licolor == index? 'activecolor': ''" v-for="(item,index) in movies" @click="libt(index)" >{{index}}--{{item}}</li></ul>
+        <ul>
+            <!-- 三目运算符 -->
+            <!-- <li :class="licolor == index? 'activecolor': ''" v-for="(item,index) in movies" @click="libt(index)" >{{index}}--{{item}}</li> -->
+
+            
+            <li :class="{activecolor:licolor === index}" v-for="(item,index) in movies" @click="libt(index)" >{{index}}--{{item}}</li>
+        </ul>
+        
     </div>
 </body>
 </html>
