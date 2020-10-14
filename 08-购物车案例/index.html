@@ -24,6 +24,8 @@
 </head>
 <body>
     <div id="app">
+        <!-- 加一个判断 购物车为空不显示 -->
+      <div v-if='books.length'>
         <table>
             <thead>
                 <tr>
@@ -34,12 +36,31 @@
                     <th>购买数量</th>
                     <th>操作</th>
                 </tr>
-                <tr v-for='item in books'>
+                <!-- <tr v-for='item in books'>
                     <td v-for='value in item' >{{value}}</td>
                     <td><button>删除</button></td>
+                </tr> -->
+                <tr v-for='(item,index) in books'>
+                    <td>{{item.id}}</td>
+                    <td>{{item.name}}</td>
+                    <td>{{item.date}}</td>
+                    <!-- 方法 -->
+                    <!-- <td>{{getPrice(item.price)}}</td> -->
+                    <!-- 过滤器 -->
+                    <td>{{item.price | showPrice}}</td>
+                    <td>
+                        <!-- 判断item.num<=1 时 禁止点击disabled -->
+                        <button v-bind:disabled='item.num <= 1' @click="sub(index)">-</button>{{item.num}}
+                        <button @click="add(index)">+</button>
+                    </td>
+                    <td><button @click='remove(index)'>删除</button></td>
                 </tr>
             </thead>
         </table>
+        <!-- showPrice 小数点 -->
+        <h2>总价格:{{totalPrice | showPrice}}</h2>
+      </div>
+      <h2 v-else>购物车为空</h2>
     </div>
 </body>
 </html>
@@ -79,6 +100,145 @@
               }
 
             ]
+        },
+        methods:{
+            // getPrice(price){
+            //     return '￥' + price.toFixed(2)
+            // }
+
+            // 根据下标 来操作对应的 num
+            add(index){
+                this.books[index].num++
+                console.log('add',index)
+            },
+            sub(index){
+                this.books[index].num--
+            },
+            // 删除 获取index下标来删除整行
+            remove(index){
+                this.books.splice(index,1)
+            }
+        },
+        // 过滤器
+        filters:{
+            showPrice(price){
+                // toFixed取小数点
+                return '￥' + price.toFixed(2)
+            }
+        },
+        computed:{
+            // 计算总价格
+            totalPrice(){
+                // 1. 普通的for循环
+                // let totalPrice = 0;
+                // for(let i=0; i<this.books.length; i++){
+                //     // 总价格 = 价格 * 数量
+                //     totalPrice += this.books[i].price * this.books[i].num
+                // }
+                // return totalPrice;
+
+
+                // 2. 
+                // let totalPrice = 0;
+                // for(let i in this.books){
+                //     console.log(i)
+                //     totalPrice += this.books[i].price * this.books[i].num
+                // }
+                // return totalPrice;
+
+
+                //3.
+                let totalPrice = 0;
+                for(let item of this.books){
+                    totalPrice += item.price * item.num;
+                }
+                return totalPrice;
+
+            }
         }
     })
+</script>
+
+
+<script>
+     //编程范式：命令式编程、声明式编程
+    // 编程范式：面向对象编程（第一公民：对象）/ 函数式编程（第一公民：函数）
+    // 用filter / map / reduce
+    const array = [10,50,20,40,100,111,156,15,452]
+
+    // 1.需求：取出所有小于100的数字
+    let newNum = []
+    for(let n of array){
+        if(n<100){
+            newNum.push(n)
+        }
+    }
+    console.log(newNum) // [10, 50, 20, 40, 15]
+
+    //使用filter中的回调函数有一个要求：必须返回一个boolean值
+    //true：当返回true时，函数内部会自动将这次回调的n加入到新的数组里面
+    //false：当返回false时，函数内部会过滤掉这次的n
+    let newNumFilter = array.filter(function(n){  //跟for循环一样遍历
+        return n < 100 //返回当n<100时为 true n返回到数组里面
+        // 如： return 10<100 为true n放出数组newNumFilter
+        // return true //为true 返回array数组中一样的数字
+    })
+    console.log(newNumFilter) // [10, 50, 20, 40, 15]
+
+
+
+
+
+    // 2.需求：将所有小于100的数字进行转化： 全部*2
+    let newNum2 = []
+    for(let n2 of newNum){
+        newNum2.push(n2 *2)
+    }
+    console.log(newNum2) // [20, 100, 40, 80, 200, 222, 312, 30, 904]
+
+    // map函数的使用
+    let newNum2Map = newNum.map(function(n2){
+        return n2 * 2
+    })
+    console.log(newNum2Map) // [20, 100, 40, 80, 200, 222, 312, 30, 904]
+
+
+
+
+
+    // 3.需求：将所有newNum2数字相加，得到最终的结果
+    let total = 0
+    for(n3 of newNum2){
+        total += n3
+    }
+    console.log(total) //1908
+
+    // reduce函数的使用 reduce(参数一，参数二) 必须放两个参数
+    // reduce作用对数组中所有的内容进行汇总 比如：全部相加的总数
+    // preValue 初始化的值为 0
+    let totalReduce = newNum2.reduce(function(preValue,n3){
+        return preValue + n3
+       
+    },0)
+    console.log(totalReduce) //1908
+
+    //第一次：preValue=0 n=20 (0+20= 第二次的preValue 20)
+    //第二次：preValue=20 n=100 (20+100= 第三次的preValue 120)
+    //第三次： preValue=120 n=40 
+    //第四次： preValue=160 n=80
+
+
+
+    // 总结
+    let totalArray = array.filter(function(n4){
+        return n4 < 100
+    }).map(function(n4){
+        return n4 * 2
+    }).reduce(function(preValues,n4){
+        return preValues + n4
+    },0)
+    console.log(totalArray)
+
+    let totalArray2 = array.filter(n=> n < 100).map(n=>n*2).reduce((pre, n)=>pre+n)
+    console.log(totalArray2);
 </script>
