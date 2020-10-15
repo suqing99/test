@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js 高阶函数的使用</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+    //编程范式：命令式编程、声明式编程
+   // 编程范式：面向对象编程（第一公民：对象）/ 函数式编程（第一公民：函数）
+   // 用高阶函数：filter / map / reduce
+   const array = [10,50,20,40,100,111,156,15,452]
+
+   // 1.需求：取出所有小于100的数字
+   let newNum = []
+   for(let n of array){
+       if(n<100){
+           newNum.push(n)
+       }
+   }
+   console.log(newNum) // [10, 50, 20, 40, 15]
+
+   //使用filter中的回调函数有一个要求：必须返回一个boolean值
+   //true：当返回true时，函数内部会自动将这次回调的n加入到新的数组里面
+   //false：当返回false时，函数内部会过滤掉这次的n
+   let newNumFilter = array.filter(function(n){  //跟for循环一样遍历
+       return n < 100 //返回当n<100时为 true n返回到数组里面
+       // 如： return 10<100 为true n放出数组newNumFilter
+       // return true //为true 返回array数组中一样的数字
+   })
+   console.log(newNumFilter) // [10, 50, 20, 40, 15]
+
+
+
+
+
+   // 2.需求：将所有小于100的数字进行转化： 全部*2
+   let newNum2 = []
+   for(let n2 of newNum){
+       newNum2.push(n2 *2)
+   }
+   console.log(newNum2) //[20, 100, 40, 80, 30]
+
+   // map函数的使用
+   let newNum2Map = newNum.map(function(n2){
+       return n2 * 2
+   })
+   console.log(newNum2Map) // [20, 100, 40, 80, 30]
+
+
+
+
+
+   // 3.需求：将所有newNum2数字相加，得到最终的结果
+   let total = 0
+   for(n3 of newNum2){
+       total += n3
+   }
+   console.log(total) //270
+
+   // reduce函数的使用 reduce(参数一，参数二) 必须放两个参数
+   // reduce作用对数组中所有的内容进行汇总 比如：全部相加的总数
+   // preValue 初始化的值为 0
+   let totalReduce = newNum2.reduce(function(preValue,n3){
+       return preValue + n3
+      
+   },0)
+   console.log(totalReduce) //270
+
+   //第一次：preValue=0 n=20 (0+20= 第二次的preValue 20)
+   //第二次：preValue=20 n=100 (20+100= 第三次的preValue 120)
+   //第三次： preValue=120 n=40 
+   //第四次： preValue=160 n=80
+
+
+
+   // 总结
+   let totalArray = array.filter(function(n4){
+       return n4 < 100
+   }).map(function(n4){
+       return n4 * 2
+   }).reduce(function(preValues,n4){
+       return preValues + n4
+   },0)
+   console.log(totalArray)//270
+
+
+   let totalArray2 = array.filter(n=> n < 100).map(n=>n*2).reduce((pre, n)=>pre+n)
+   console.log(totalArray2);//270
+</script>
