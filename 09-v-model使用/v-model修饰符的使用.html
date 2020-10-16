@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-model修饰符的使用</title>
+</head>
+<body>
+    <div id="app">
+        <h3>lazy修饰符：让数据在失去焦点或者点击回车时才会更新数据 </h3>
+        <input type="text" v-model.lazy='lazyInput'>
+        <span>{{lazyInput}}</span>
+        <br>
+        <br>
+
+        <h4>默认情况下，在输入框无论输入字母还是数字都会被当成字符串进行处理</h4>
+        <h3>number修饰符：可以让在输入框中输入的内容自动转成数字类型 </h3>
+        <input type="text" v-model.number='numberInput'>
+        <span>{{numberInput}}----{{ typeof numberInput}}</span>
+
+        <h3>trim修饰符：可以清除input框里面内容左右两边的空格</h3>
+        <input type="text" v-model.trim='trimInput'>
+        <span>{{trimInput}}</span>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el:"#app",
+        data:{
+            lazyInput: '请输入',
+            numberInput:'',
+            trimInput:''
+        }
+    })
+</script>

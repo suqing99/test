@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-model结合select类型</title>
+</head>
+<body>
+    <div id="app">
+
+        <!-- 选择单个 -->
+    <select name="" id="" v-model='fruit'>
+        <option value="苹果">苹果</option>
+        <option value="草莓">草莓</option>
+        <option value="香蕉">香蕉</option>
+        <option value="榴莲">榴莲</option>
+    </select>
+    <h3>
+        你选择的水果是：{{fruit}}
+    </h3>
+
+    <br>
+    <br>
+    <!-- 选择多个 -->
+    <select name="" id="" v-model='fruits' multiple>
+        <option value="苹果">苹果</option>
+        <option value="草莓">草莓</option>
+        <option value="香蕉">香蕉</option>
+        <option value="榴莲">榴莲</option>
+    </select>
+    <h3>
+        你选择的水果是：{{fruits}}
+    </h3>
+</div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el:"#app",
+        data:{
+            fruit:'苹果', //选择单个
+            fruits:[] //选择多个用数组
+        }
+    })
+</script>

@@ -6,8 +6,41 @@
     <title>v-model结合checkbox类型</title>
 </head>
 <body>
-    
+    <div id="app">
+        <!--  1.CheckBox单选框 -->
+        <label for="agree">       
+            <input type="checkbox" id="agree" v-model='isAgree'> 同意协议
+        </label>
+        <h2>你选择的是:{{isAgree}}</h2>
+        <button :disabled="!isAgree">下一步</button>
+<br>
+        <!--  2.CheckBox多选框 -->
+      
+            <input type="checkbox" name="" id="" value="篮球" v-model='hobbies'>篮球
+            <input type="checkbox" name="" id="" value="火球" v-model='hobbies'>火球
+            <input type="checkbox" name="" id="" value="唱歌" v-model='hobbies'>唱歌
+            <input type="checkbox" name="" id="" value="足球" v-model='hobbies'>足球
+            <input type="checkbox" name="" id="" value="傻逼" v-model='hobbies'>傻逼
+            <h2>
+               你的爱好是： {{hobbies}}
+            </h2>
+
+            <!-- 值绑定 用for循环出数组里面的值 -->
+            <label :for="item" v-for='item in array'>
+                <input type="checkbox" name="" :value='item' id="item" v-model='hobbies'>{{item}}
+            </label>
+    </div>
 </body>
 </html>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el:"#app",
+        data:{
+            isAgree: false,  // 单选框 
+            hobbies:[],  //多选框
+            array:['篮球','火球','羽毛球','乒乓球','足球']
+        }
+    })
+</script>
