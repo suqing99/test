@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件化的基础使用</title>
+</head>
+
+<body>
+   
+   
+
+    <div id="app">
+        <!-- 3.使用组件 ：组件必须挂载在某个Vue实例下，否则不会生效 -->
+       <components></components>
+
+       <components></components>
+    </div>
+
+    <!-- 这个组件就是没有挂载Vue实例 所以不会生效 -->
+    <components></components>
+</body>
+
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    // 1.创建组件构造器对象
+    const cpnC = Vue.extend({
+        //template模板  显示HTML代码
+        template: `
+            <div>
+                <h3>组件的使用分成三个步骤：</h3>
+            <ol>
+                <li>创建组件构造器（调用Vue.extend()方法）</li>
+                <li>注册组件（调用Vue.component()方法）</li>
+                <li>使用组件（在Vue实例的作用范围内）</li>
+            </ol>
+            </div>
+        `
+    })
+    // 2.注册组件：  需要传递两个参数 Vue.component('注册组件的标签名' , 组件构造器对象)
+    Vue.component('components' , cpnC)
+
+    const app = new Vue({
+        el:"#app",
+        data:{
+
+        }
+    })
+</script>

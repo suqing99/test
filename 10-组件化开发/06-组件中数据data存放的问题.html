@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>06-组件中数据存放的问题</title>
+</head>
+<body>
+    <div id="app">
+        <moban></moban>
+        <moban></moban>
+    </div>
+
+   
+
+    <!-- 组件里面放数据 -->
+    <template id="moban">
+        <div>
+            <h3>{{title}}</h3>
+            <h4>当前数量：{{num}}</h4>
+            <button @click=add>+</button>
+            <button @click=sub>-</button>
+        </div>
+    </template>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+    // 注册一个全局组件
+    Vue.component('moban',{
+        template:"#moban",
+        // 组件里面放数据data是一个函数 里面返回一个对象 
+        //组件中的data数据都应该是相互隔离，互不影响的 
+        data(){
+            return{
+                title:'标题',
+                num:0
+            }
+        },
+        methods: {
+            add(){
+                this.num++
+            },
+            sub(){
+                this.num--
+            }
+        },
+    })
+
+    const app = new Vue({
+        el:"#app",
+      
+    })
+</script>

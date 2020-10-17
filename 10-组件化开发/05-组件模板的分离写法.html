@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05-组件模板的分离写法</title>
+</head>
+<body>
+    <div id="app">
+        <moban></moban>
+        <moban2></moban2>
+    </div>
+
+    <!-- 1.通过script标签 类型是text/x-template类型 加id -->
+    <script type="text/x-template" id="moban">
+        <div>
+            <h3>通过script标签来放入模板里面的html</h3>
+            <p>内容11111111111</p>
+        </div>
+    </script>
+
+    <!-- 2.通过template标签 加id -->
+    <template id="moban2">
+        <div>
+            <h3>通过template标签来放入HTML内容</h3>
+        </div>
+    </template>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+
+    // 注册一个全局组件
+    Vue.component('moban',{
+        template:"#moban",
+    })
+
+    const app = new Vue({
+        el:"#app",
+        // 
+        components:{
+            moban2:{
+                template:'#moban2'
+            }
+        }
+    })
+</script>

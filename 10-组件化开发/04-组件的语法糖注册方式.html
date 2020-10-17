@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04-组件的语法糖注册方式</title>
+</head>
+<body>
+    <div id="app">
+        <cp></cp>
+        <cpn2></cpn2>
+    </div>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    // 1.注册组件的语法糖 ：主要是省去调用Vue.extend()的步骤，可以直接使用一个对象来代替
+    // 1.创建组件构造器
+    // const cpnC = Vue.extend({
+    //     template:`
+    //         <div>
+    //             <h3>标题</h3>
+    //             <p>内容ad哈就开会大家看哈技术的</p>
+    //         </div>
+    //     `
+    // })
+
+    // 2.注册全局组件  可以直接把组件构造器对象{template:``} 拿过来直接放入里面
+    Vue.component('cp' , {
+        template:`
+            <div>
+                <h3>标题全局组件</h3>
+                <p>内容ad哈就开会大家看哈技术的</p>
+            </div>
+        `
+    })
+    const app = new Vue({
+        el:"#app",
+
+        //注册局部组件
+        components:{
+            cpn2:{
+                template:`
+            <div>
+                <h3>标题局部组件</h3>
+                <p>内容ad哈就开会大家看哈技术的</p>
+            </div>
+        `
+            }
+        }
+    })
+</script>
