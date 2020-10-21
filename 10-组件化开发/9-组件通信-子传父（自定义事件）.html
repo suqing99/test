@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9-组件通信-子传父（自定义事件）</title>
+</head>
+<body>
+    <h3>什么时候需要自定义事件</h3>
+    <ol>
+        <li>当子组件需要父组件传递数据时，就要用到自定义事件</li>
+        <li>v-on不仅可以用于监听DOM事件，可以用于组件间的自定义事件</li>
+    </ol>
+    <hr>
+    <h3>自定义事件的流程</h3>
+    <ol>
+        <li>在子组件中，通过$emit()来触发事件</li>
+        <li>在父组件中，通过v-on来监听子组件事件</li>
+    </ol>
+    <hr>
+    <br>
+    <!-- 父组件模板 -->
+    <div id="app">
+        <!-- 自定义事件 在父组件中，通过v-on来监听子组件事件 -->
+        <cpn v-on:item-click="cpnClick"></cpn>
+    </div>
+
+    <!-- 子组件模板 -->
+    <template id="cpn">
+        <div>
+            <button v-for='item in cate' @click="bt(item)">{{item.name}}</button>
+        </div>
+    </template>
+</body>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    //  1.子组件
+    const cpn = {
+        template:"#cpn",
+        data(){
+            return{
+                cate:[
+                    {
+                        id:1,
+                        name: '猫猫'
+                    },
+                    {
+                        id:2,
+                        name: '狗狗'
+                    },
+                    {
+                        id:3,
+                        name: '猪猪'
+                    },
+                    {
+                        id:4,
+                        name: '鱼鱼'
+                    }
+                ]
+            }
+        },
+        methods: {
+            bt(item){
+                console.log('bt')
+                // 发射事件 自定义事件 在子组件中，通过$emit()来触发事件
+                // 触发 父组件中v-on中的事件
+                this.$emit('item-click',item)
+            }
+        },
+    }
+
+    // 2.父组件
+    const app = new Vue({
+        el:"#app",
+        data:{
+            
+        },
+        components:{
+            cpn
+        },
+        methods: {
+            //  父组件中的自定义事件
+            cpnClick(item){  // item参数是从子组件中传递过来
+                console.log('cpnClick', item)
+            }
+        },
+    })
+</script>

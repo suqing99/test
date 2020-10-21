@@ -22,6 +22,22 @@
 </html>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
+    
+    // 全局组件
+// Vue.component('cnp',{
+//     template:"#cnp",
+//         props:{
+//             objName: Object,
+//             suQing:{
+//                 type:String,
+//                 default(){
+//                     return '你好啊'
+//                 }
+//             }
+//         }
+//   })
+
+    // 局部组件 父传子
     const cnp = {
         template:"#cnp",
         props:{
@@ -43,6 +59,7 @@
                 age:11
             }
         },
+        // 局部组件
         components:{
             cnp
         }
