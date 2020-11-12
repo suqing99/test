@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02-具名插槽的使用</title>
+</head>
+<body>
+    <div id="app">
+        <box><button slot="left">按钮</button><input slot='centen' type="text"></box>
+     
+        <box></box>
+    </div>
+
+    <template id="box">
+        <div>
+            <slot name='left'><span>左边</span></slot>
+            <slot name='centen'><span>中间</span></slot>
+            <slot name='right'><span>右边</span></slot>
+        </div>
+    </template>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el:"#app",
+        data:{
+
+        },
+        components:{
+            box:{
+                template:"#box",
+
+            }
+        }
+    })
+</script>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1-slot插槽的基本使用</title>
+</head>
+<body>
+    <!-- 
+        1、插槽的基本使用 <slot></slot>
+        2、插槽的默认值 <slot>放默认值</slot>
+        3、如果有多个值，同时放入组件进行替换时，一起作为替换元素
+
+     -->
+    <div id="app">
+        <box><h5>11111111</h5></box>
+        <box><span>222222222</span><em>啊啊啊啊啊</em></box>
+        <!-- 默认值 是插槽 -->
+        <box></box>
+        <box></box>
+    </div>
+    <template id="box">
+        <div>
+            <h3>组件</h3>
+            <slot><button>按钮</button></slot>
+        </div>
+    </template>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el:"#app",
+        data:{
+
+        },
+        components:{
+            box:{
+                template:"#box",
+
+            }
+        }
+    })
+</script>

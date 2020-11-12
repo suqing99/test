@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11-组件访问-父访问子$children和$refs</title>
+</head>
+<body>
+    <div id="app">
+        <cpn :fumsg= msg v-on:clicks='ziclick'></cpn>
+        <cpn></cpn>
+        <cpn ref='aa'></cpn>
+        <button @click=btnClick>按钮</button>
+    </div>
+    <template id="cpn">
+        <div>
+            {{fumsg}}
+            <h3 @click='bt'>{{zi}}</h3>
+        </div>
+    </template>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el:"#app",
+        data:{
+            msg: '我是$children' 
+        },
+        methods: {
+            ziclick(){
+                
+            },
+            btnClick(){
+                // 第一种： $children是一个数组
+               // console.log(this.$children) 
+                //$children[0]调用showMsg方法
+               // this.$children[0].showMsg()
+
+               // 循环 cpn 子组件 $children是指<cpn>标签
+                // for(let c of this.$children){  //数组循环
+                //     console.log(c.zi)
+                //     c.showMsg()
+                // }
+
+                // 第二种 $refs => 对象类型 默认是空 必须在组件里面加上 ref=''
+                console.log(this.$refs)
+                console.log(this.$refs.aa.zi)
+
+            }
+        },
+        components:{
+            cpn:{
+                template:"#cpn",
+                data(){
+                    return{
+                        zi:'子传父'
+                    }
+                },
+                methods: {
+                    // 子传父
+                    bt(){
+                        this.$emit('clicks',zi)
+                    },
+
+                    showMsg(){
+                        console.log('showMsg')
+                    }
+                },
+                props:{
+                    fumsg:{
+                        type:String,
+                        
+                    }
+                }
+
+            }
+        }
+        
+    })
+</script>

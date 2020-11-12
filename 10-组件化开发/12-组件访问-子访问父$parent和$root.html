@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12-组件访问-子访问父$parent和$root.html</title>
+</head>
+<body>
+    <div id='app'>
+        <cpn :name = 'suqing'></cpn>
+    </div>
+    <template id="cpn">
+        <div> <h2>{{name}}</h2>
+            <ccpn></ccpn>
+           
+        </div>
+    </template>
+
+    <template id="ccpn">
+        <div>
+           <h3>我是子组件</h3>
+           <button @click='bt'>按钮</button>
+        </div>
+    </template>
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    const app = new Vue({
+        el:"#app",
+        data:{
+            suqing:"我是组件cpn",
+            title:'根组件'
+        },
+        components:{
+            cpn:{
+                template:"#cpn",
+                data(){
+                    return{
+                        msg:'我是cpn组件的name'
+                    }
+                },
+                props:{
+                        name:{
+                            type:String
+                        }
+                    },
+               components:{
+                   ccpn:{
+                       template:'#ccpn',
+                    props:{
+                        name:{
+                            type:String
+                        }
+                    },
+
+                    methods: {
+                        bt(){
+                            // 1.访问父组件 $parent
+                            console.log(this.$parent)
+                            console.log(this.$parent.msg)
+
+                            // 2.访问跟组件(vue实例)$root
+                            console.log(this.$root)
+                            console.log(this.$root.title)
+                        }
+                    },
+                   }
+               }
+            }
+        }
+    })
+</script>
